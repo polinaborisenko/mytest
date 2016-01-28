@@ -19,7 +19,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.fail;
 
 @RunWith(value = Parameterized.class)
-@Title("Тестирование деления")
+@Title("РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ РґРµР»РµРЅРёСЏ")
 public class DivCalcTest {
 	private final CalcParams params;
 
@@ -55,15 +55,15 @@ public class DivCalcTest {
 	}
 		
 	@Test()
-	@Title("Проверка результата деления") 
+	@Title("РџСЂРѕРІРµСЂРєР° СЂРµР·СѓР»СЊС‚Р°С‚Р° РґРµР»РµРЅРёСЏ") 
 	public void myTest() throws Exception {
 		Calculator calc = new Calculator(params.firstParameter,params.secondParameter);
 		int res = calc.getAddResult();
-		saveTextLog("Уравнение","("+params.firstParameter+"/"+params.secondParameter+") == " + params.expectedResult);
+		saveTextLog("РЈСЂР°РІРЅРµРЅРёРµ","("+params.firstParameter+"/"+params.secondParameter+") == " + params.expectedResult);
 		if (params.secondParameter==0) {
-			fail("Нельзя делить на ноль!");
+			fail("РќРµР»СЊР·СЏ РґРµР»РёС‚СЊ РЅР° РЅРѕР»СЊ!");
 		} else {
-		       	assertThat("Результат("+params.firstParameter+"/"+params.secondParameter+") не равен " + params.expectedResult, (params.firstParameter/params.secondParameter)==params.expectedResult );
+		       	assertThat("Р РµР·СѓР»СЊС‚Р°С‚("+params.firstParameter+"/"+params.secondParameter+") РЅРµ СЂР°РІРµРЅ " + params.expectedResult, (params.firstParameter/params.secondParameter)==params.expectedResult );
 		}
 	}
 

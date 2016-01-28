@@ -17,7 +17,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(value = Parameterized.class)
-@Title("Тестирование сложения")
+@Title("РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃР»РѕР¶РµРЅРёСЏ")
 public class AddCalcTest {
 	private final CalcParams params;
 
@@ -53,12 +53,12 @@ public class AddCalcTest {
 	}
 		
 	@Test()
-	@Title("Проверка результата сложения") 
+	@Title("РџСЂРѕРІРµСЂРєР° СЂРµР·СѓР»СЊС‚Р°С‚Р° СЃР»РѕР¶РµРЅРёСЏ") 
 	public void myTest() throws Exception {
 		Calculator calc = new Calculator(params.firstParameter,params.secondParameter);
 		int res = calc.getAddResult();
-		saveTextLog("Уравнение","("+params.firstParameter+"+"+params.secondParameter+") == " + params.expectedResult);
-	       	assertThat("Результат("+params.firstParameter+"+"+params.secondParameter+") не равен " + params.expectedResult, (params.firstParameter+params.secondParameter)==params.expectedResult );
+		saveTextLog("РЈСЂР°РІРЅРµРЅРёРµ","("+params.firstParameter+"+"+params.secondParameter+") == " + params.expectedResult);
+	       	assertThat("Р РµР·СѓР»СЊС‚Р°С‚("+params.firstParameter+"+"+params.secondParameter+") РЅРµ СЂР°РІРµРЅ " + params.expectedResult, (params.firstParameter+params.secondParameter)==params.expectedResult );
 	}
 
 	@Attachment(value = "{0}", type = "text/plain")
