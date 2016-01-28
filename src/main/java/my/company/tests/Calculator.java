@@ -26,7 +26,13 @@ public class Calculator {
        return first * second;
     }    
     public int getDivResult(){
-       return first / second;
-    }    
-
+	int res = 0;
+	try {
+		 res = first / second;
+	}
+	catch (ArithmeticException ae) {
+        	System.out.println("ArithmeticException occured!");
+	}
+	return res;
+    }
 }

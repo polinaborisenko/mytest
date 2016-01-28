@@ -12,9 +12,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.ArrayList;
 import com.csvreader.CsvReader;
+import java.lang.ArithmeticException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.fail;
 
 @RunWith(value = Parameterized.class)
 @Title("Тестирование деления")
@@ -58,7 +60,11 @@ public class DivCalcTest {
 		Calculator calc = new Calculator(params.firstParameter,params.secondParameter);
 		int res = calc.getAddResult();
 		saveTextLog("Уравнение","("+params.firstParameter+"/"+params.secondParameter+") == " + params.expectedResult);
-	       	assertThat("Результат("+params.firstParameter+"/"+params.secondParameter+") не равен " + params.expectedResult, (params.firstParameter/params.secondParameter)==params.expectedResult );
+		if (params.secondParameter==0) {
+			fail("Нельзя делить на ноль!");
+		} else {
+		       	assertThat("Результат("+params.firstParameter+"/"+params.secondParameter+") не равен " + params.expectedResult, (params.firstParameter/params.secondParameter)==params.expectedResult );
+		}
 	}
 
 	@Attachment(value = "{0}", type = "text/plain")
