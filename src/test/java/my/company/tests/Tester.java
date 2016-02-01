@@ -8,19 +8,18 @@ import org.junit.runners.Parameterized.Parameters;
 import ru.yandex.qatools.allure.annotations.*;
 
 import java.io.IOException;
+import java.lang.Exception;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.ArrayList;
 import com.csvreader.CsvReader;
-import java.lang.ArithmeticException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.fail;
 
+@Title("Тестирование калькулятора") 
 @RunWith(value = Parameterized.class)
-@Title("Тестирование деления")
-public class DivCalcTest {
+public class Tester {
 	private final CalcParams params;
 
 	public static class CalcParams {
@@ -30,7 +29,8 @@ public class DivCalcTest {
 		public int expectedResult;
 	}
 
-	public DivCalcTest(CalcParams parameters) {
+	
+	public Tester(CalcParams parameters) {
 		this.params = parameters;
 	}
 
@@ -46,25 +46,25 @@ public class DivCalcTest {
 			testContainer.secondParameter = Integer.parseInt(csv.get(1));
 			testContainer.operation = csv.get(2).charAt(0);
 			testContainer.expectedResult = Integer.parseInt(csv.get(3));
-			if (testContainer.operation=='/') {
-				para.add(new Object[] { testContainer });
-			}
+			para.add(new Object[] { testContainer });
 		}
 		csv.close();
 		return para;
 	}
-		
+
 	@Test()
-	@Title("Проверка результата деления") 
-	public void myTest() throws Exception {
-		Calculator calc = new Calculator(params.firstParameter,params.secondParameter);
-		int res = calc.getAddResult();
-		saveTextLog("Уравнение","("+params.firstParameter+"/"+params.secondParameter+") == " + params.expectedResult);
-		if (params.secondParameter==0) {
-			fail("Нельзя делить на ноль!");
-		} else {
-		       	assertThat("Результат("+params.firstParameter+"/"+params.secondParameter+") не равен " + params.expectedResult, (params.firstParameter/params.secondParameter)==params.expectedResult );
+	@Title("Проверка результата") 
+	public void myTest(){
+		Calculator calc = new Calculator(params.firstParameter, params.secondParameter);
+		int res = 0;
+		switch (params.operation) {
+		case '+': res = calc.getAddResult(); break;
+		case '-': res = calc.getSubResult(); break;
+		case '*': res = calc.getMulResult(); break;
+		case '/': res = calc.getDivResult(); break;
 		}
+		saveTextLog( "Уравнение","(" + params.firstParameter + params.operation + params.secondParameter + ") == " + params.expectedResult );
+	       	assertThat( "Результат(" + params.firstParameter + params.operation + params.secondParameter + ") не равен " + params.expectedResult, res == params.expectedResult );
 	}
 
 	@Attachment(value = "{0}", type = "text/plain")
